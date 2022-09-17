@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define('pokemon', {
+  sequelize.define('type', {
     // id: {
     //   type: DataTypes.INTEGER,
     //   allowNull: false,
@@ -10,7 +10,6 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
     }
   });
 };
