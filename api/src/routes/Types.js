@@ -1,23 +1,26 @@
 const axios = require('axios');
-const {Router} = require('express');
-const {type} = require('../db');
+const { Router } = require('express');
+const { Type } = require('../db');
 const router = Router();
 
 // Obtener los tipos de pokemons
-router.get('/', (req, res) => {
-    const link = 'https://pokeapi.co/api/v2/type';
+router.get('/', async (req, res) => {
     // llamado async a la api
     // guardar el objeto en la db (verificar los datos)
     try {
-        axios.get(link).then(response => {
-            let aux = response.data.results.map((type) => {
-                const obj = {
-                    name: type.name
-                };
-                return obj;
+        const typeApi = await axios.get('https://pokeapi.co/api/v2/type');
+        const typeData = typeApi.data
+        const types = typeData.results.map(el => el.name);
+
+        types.forEach(element => {
+            Type.findOrCreate({
+                where: {
+                    name: element
+                }
             });
-            res.send(aux);
         });
+        const allTypes = await Type.findAll();
+        return res.send(allTypes);
     } catch (e) {
         console.log(e);
     }
