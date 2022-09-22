@@ -17,11 +17,28 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+const { Type } = require('./src/db');
+const axios = require('axios');
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 
+async function createTypes() {
+  const typeApi = await axios.get('https://pokeapi.co/api/v2/type');
+  const typeData = typeApi.data;
+  const types = typeData.results.map(el => {
+    const obj = {
+      id: el.id,
+      name: el.name
+    }
+    return obj;
+  });
+
+  await Type.bulkCreate(types);
+};
+
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: true }).then(async () => {
+  await createTypes();
   server.listen(3001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });

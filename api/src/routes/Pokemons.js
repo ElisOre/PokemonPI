@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
             const namePoke = await allPokes.filter(e => //se filtra el pokemon pasado por query y lo retorno
                 e.name.toLowerCase().includes(name.toLowerCase())
             );
-            namePoke.length ? res.json(namePoke) : res.status(400).json({ msg: 'This pokemon not exist' });
+            namePoke.length ? res.send(namePoke) : res.status(400).json({ msg: 'This pokemon not exist' });
         }
     } catch (error) {
         next(error);
@@ -50,25 +50,37 @@ router.post('/', async (req, res) => {
     // verificar los datos por body
     // relacionar el pokemon con sus tipos
     // guardar en la db
-    const { name, image, hp, attack, defense, speed, height, weight, types } = req.body;
 
-    if (!name) res.status(400).json({ msg: "Name is required" }); //el nombre no puede ser nulo
-    if (typeof name !== 'string') res.status(400).json({ msg: "Incorrect data" }); //solo puede ser un string
 
     try {
-        const obj = { name, image, hp, attack, defense, speed, height, weight };
-        const newPoke = await Pokemon.create(obj);
+        const { name, image, hp, attack, defense, speed, height, weight, types } = req.body;
+
+        const newPoke = await Pokemon.create({
+            name,
+            image,
+            hp,
+            attack,
+            defense,
+            speed,
+            height,
+            weight
+        });
+
+        if (!name) res.status(400).json({ msg: "Name is required" }); //el nombre no puede ser nulo
+        if (typeof name !== 'string') res.status(400).json({ msg: "Incorrect data" }); //solo puede ser un string
 
         if (Array.isArray(types) && types.length) { //compruebo que sea un arreglo y que no esté vacío
-            const dbTypes = Promise.all(types).then(r => {
-                r.map(e => {
-                    return Type.findOne({ where: { name: e } }); //busco cada dato del arreglo en la tabla type
-                });
-            });
-            await newPoke.setTypes(dbTypes); //le seteo los tipos al pokemon
+            const dbTypes = await Promise.all(
+                types.map(e => {
+                    return Type.findOne({ where: { name: e } });
+                })
+            );
 
-            return res.json({ msg: 'Successfully created' });
-        };
+            await newPoke.addType(dbTypes); //le agrego los tipos al pokemon
+            // const aux = await Pokemon.findByPk(newPoke.id, { include: [{ model: Type }] })
+
+            return res.json({ msg: `${name} created successfully` });
+        }
 
     } catch (error) {
         res.status(400).json({ msg: 'Was an error when creating: ' + error });

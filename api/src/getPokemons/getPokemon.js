@@ -20,7 +20,7 @@ const infoApi = async () => {
         return {
             id: result.id,
             name: result.name,
-            types: result.types.map(t => t.type.name),
+            types: result.types.map(t => { return { name: t.type.name } }),
             image: result.sprites.other.dream_world.front_default,
             hp: result.stats[0].base_stat,
             attack: result.stats[1].base_stat,
@@ -35,7 +35,15 @@ const infoApi = async () => {
 
 const infoDB = async () => {
     try {
-        const pokemonCreated = await Pokemon.findAll({ include: [{ model: Type }] });
+        const pokemonCreated = await Pokemon.findAll({
+            include: {
+                model: Type,
+                attributes: ['name'],
+                through: {
+                    attributes: []
+                }
+            }
+        });
         return pokemonCreated; //verificar los datos y su relacion con type de la db 
     } catch (error) {
         console.error(new Error(error));
