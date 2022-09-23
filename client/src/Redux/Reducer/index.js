@@ -10,13 +10,13 @@ let initialState = {
     filters: []
 };
 
-const rootReducer = (state = initialState, { type, payload }) => {
-    switch (type) {
+const rootReducer = (state = initialState, action) => {
+    switch (action.type) {
         case GET_POKE:
             return {
                 ...state,
-                pokes: payload,
-                copyPokes: payload
+                pokes: action.payload,
+                copyPokes: action.payload
             };
         
         default:
