@@ -76,7 +76,7 @@ router.post('/', async (req, res) => {
                 })
             );
 
-            await newPoke.addType(dbTypes); //le agrego los tipos al pokemon
+            await newPoke.setTypes(dbTypes); //le seteo los tipos al pokemon
             // const aux = await Pokemon.findByPk(newPoke.id, { include: [{ model: Type }] })
 
             return res.json({ msg: `${name} created successfully` });

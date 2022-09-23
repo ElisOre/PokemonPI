@@ -35,7 +35,7 @@ const infoApi = async () => {
 
 
 const infoDB = async () => {
-    await Pokemon.bulkCreate(infoApi); 
+    await Pokemon.bulkCreate(infoApi);
     try {
         const pokemonCreated = await Pokemon.findAll({
             include: {
