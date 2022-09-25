@@ -21,7 +21,8 @@ export default function AllCards() {
                 {statePoke.length ? (
                     statePoke.map(poke => (
                         <Link to={`/details/${poke.id}`}>
-                            <Card name={poke.name} image={poke.image} types={poke.types} />
+                            <Card name={poke.name} image={poke.image} types={poke.types}
+                            attack={poke.attack} defense={poke.defense} hp={poke.hp} />
                         </Link>
                     ))
                 ) : (
