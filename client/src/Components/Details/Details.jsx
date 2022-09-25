@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getDetails } from "../../Redux/Actions";
+import { clearDetails, getDetails } from "../../Redux/Actions";
 
 export default function DetailsPoke(props) {
     const dispatch = useDispatch();
@@ -9,12 +9,15 @@ export default function DetailsPoke(props) {
     const id = props.match.params.id;
 
     function homeSubmit(e) {
-        e.preventDefault();
+        e.preventDefault()
         history.push('/home');
     };
 
     useEffect(() => {
         dispatch(getDetails(id));
+        return () => {
+            dispatch(clearDetails());
+        };
     }, [dispatch, id]);
 
     const detail = useSelector(state => state.details);
