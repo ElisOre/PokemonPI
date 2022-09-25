@@ -1,7 +1,7 @@
 // import actions
 import {
     GET_POKE, GET_POKE_NAME, GET_TYPES, GET_DETAILS, FILTER_BY_TYPE,
-    FILTER_CREATED, SORT
+    FILTER_CREATED, SORT, CLEAR_DETAILS
 } from '../Actions';
 
 // estado inicial
@@ -31,6 +31,12 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 details: action.payload
+            };
+
+        case CLEAR_DETAILS:
+            return {
+                ...state,
+                details: []
             };
 
         case GET_TYPES:

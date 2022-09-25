@@ -4,6 +4,7 @@ export const GET_POKE = 'GET_POKE';
 export const GET_POKE_NAME = 'GET_POKE_NAME';
 export const GET_TYPES = 'GET_TYPES';
 export const GET_DETAILS = 'GET_DETAILS';
+export const CLEAR_DETAILS = 'CLEAR_DETAILS';
 export const FILTER_BY_TYPE = 'FILTER_BY_TYPE';
 export const FILTER_CREATED = 'FILTER_CREATED';
 export const SORT = 'SORT';
@@ -74,6 +75,14 @@ export const getDetails = (id) => {
         } catch (error) {
             console.log(error);
         };
+    };
+};
+
+export function clearDetails() { 
+    return (dispatch) => {
+        dispatch({
+            type: CLEAR_DETAILS
+        });
     };
 };
 
