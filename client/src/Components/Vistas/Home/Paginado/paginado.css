@@ -1,0 +1,22 @@
+.page {
+    margin-left: 10px;
+    align-items: center;
+    display: inline;
+    padding: 8px;
+}
+
+.btnPaginado {
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    transition-duration: 0.4s;
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+}
+
+.btnPaginado:hover {
+    cursor: pointer;
+    background-color: #ddd91396;
+    color: rgb(0, 0, 0);
+    border-color: white;
+}
