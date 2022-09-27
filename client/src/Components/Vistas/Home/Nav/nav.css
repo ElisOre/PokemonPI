@@ -1,0 +1,36 @@
+.nav {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    height: 100px;
+}
+
+.pokedex {
+    width: 17%;
+}
+
+.buttonCreateNav {
+    font-weight: 600;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.navSearchName {
+    margin-top: 1px;
+    margin-right: 10px;
+    margin: 0px;
+    height: 45px;
+    right: 30px;
+}
+
+.buttonSearch {
+    margin-right: 1px;
+    margin: 1px;
+    margin-bottom: 1px;
+    height: 25px;
+    border-radius: 10%;
+    cursor: pointer;
+    top: 10px;
+    right: 20px;
+}

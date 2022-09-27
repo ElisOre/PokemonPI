@@ -20,11 +20,3 @@
     font-weight: bold;
     border-color: rgb(255, 255, 255);
 }
-
-.buttonLanding:focus {
-    outline: 0;
-}
-
-.buttonLanding:hover {
-    background-size: 120%;
-}
