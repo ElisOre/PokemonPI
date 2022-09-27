@@ -1,0 +1,30 @@
+.landing {
+    display: flex;
+    align-items: medium;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+    background-image: url("./R.jpg");
+    background-size: 1550px;
+}
+
+.buttonLanding {
+    width: 200px;
+    height: 63px;
+    font-size: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    color: rgb(2, 2, 2);
+    margin-top: 40px;
+    background-color: rgba(166, 157, 157, 0.477);
+    font-weight: bold;
+    border-color: rgb(255, 255, 255);
+}
+
+.buttonLanding:focus {
+    outline: 0;
+}
+
+.buttonLanding:hover {
+    background-size: 120%;
+}
