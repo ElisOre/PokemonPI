@@ -76,7 +76,7 @@ export default function CreatePoke() {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <h2>Lets create your Pokemon!</h2>
+                <h2>Let's create your Pokemon!</h2>
 
                 <label htmlFor="">Name: </label>
                 <input
@@ -154,7 +154,7 @@ export default function CreatePoke() {
                 />{" "}
 
                 <select onChange={e => handleSelect(e)}>
-                    <option value="empty"></option>
+                    <option value="empty">Types</option>
                     {
                         types.map(t => (<option key={t.name} value={t.name}>{t.name}</option>))
                     }

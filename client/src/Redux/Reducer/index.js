@@ -1,7 +1,7 @@
 // import actions
 import {
     GET_POKE, GET_POKE_NAME, GET_TYPES, GET_DETAILS, FILTER_BY_TYPE,
-    FILTER_CREATED, SORT, CLEAR_DETAILS
+    FILTER_CREATED, ORDER, CLEAR_DETAILS
 } from '../Actions';
 
 // estado inicial
@@ -10,7 +10,6 @@ let initialState = {
     copyPokes: [],
     types: [],
     details: [],
-    filters: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -53,8 +52,7 @@ const rootReducer = (state = initialState, action) => {
         case FILTER_BY_TYPE:
             const copyPokes = state.copyPokes;
             const filters = action.payload === 'types' ? copyPokes : copyPokes.filter(e =>
-                e.types.includes(action.payload)
-            );
+                e.types.includes(action.payload) || e.types.find(e => e.name === action.payload));
             return {
                 ...state,
                 pokes: filters
@@ -68,28 +66,50 @@ const rootReducer = (state = initialState, action) => {
                 pokes: action.payload === 'allp' ? state.copyPokes : created
             };
 
-        case SORT:
-            let orderedCharacters
+        case ORDER:
+            const orderASC = action.payload === 'men' ?
+                state.pokes.sort(function (a, b) {
+                    if (a.attack > b.attack) {
+                        return 1;
+                    }
+                    if (a.attack < b.attack) {
+                        return -1
+                    }
+                    return 0;
+                }) : action.payload === 'may' ?
+                    state.pokes.sort(function (a, b) {
+                        if (a.attack > b.attack) {
+                            return -1;
+                        }
+                        if (a.attack < b.attack) {
+                            return 1
+                        }
+                        return 0
+                    }) : action.payload === 'asc' ?
+                        state.pokes.sort(function (a, b) {
+                            if (a.name.toLowerCase() > b.name.toLowerCase()) {
+                                return 1;
+                            }
+                            if (a.name.toLowerCase() < b.name.toLowerCase()) {
+                                return -1
+                            }
+                            return 0;
+                        }) : action.payload === 'des' ?
+                            state.pokes.sort(function (a, b) {
+                                if (a.name.toLowerCase() > b.name.toLowerCase()) {
+                                    return -1;
+                                }
+                                if (a.name.toLowerCase() < b.name.toLowerCase()) {
+                                    return 1
+                                }
+                                return 0
+                            }) : state.pokes
 
-            if (action.payload === 'asc') {
-                orderedCharacters = state.copyPokes.slice().sort((a, b) => a.name.localeCompare(b.name));
-            };
-
-            if (action.payload === 'desc') {
-                orderedCharacters = state.copyPokes.slice().sort((a, b) => b.name.localeCompare(a.name));
-            };
-
-            if (action.payload === 'min') {
-                orderedCharacters = state.copyPokes.slice().sort((a, b) => a.attack - b.attack);
-            };
-
-            if (action.payload === 'max') {
-                orderedCharacters = state.copyPokes.slice().sort((a, b) => b.attack - a.attack);
-            };
             return {
                 ...state,
-                pokes: orderedCharacters || state.copyPokes
-            };
+                pokes: orderASC
+
+            }
 
         default:
             return state;
