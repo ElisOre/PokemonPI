@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import './cards.css';
 
 export default function Card({ name, image, types, attack, hp, defense, id }) {
     return (
         <Link to={`/details/${id}`}>
-            <div>
+            <div className="card">
                 <img src={image} alt={name} width='200px' height='200px' />
 
                 {/* Conveirto el nombre con la primer letra en mayúscula */}

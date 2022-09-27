@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPokes, getTypes, filterByTypes, filterOrigin, order } from "../../../Redux/Actions";
 import Paginado from "./Paginado/Paginado";
 import Cards from "../../CardPokes/Cards";
+import './home.css';
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -46,34 +47,29 @@ export default function Home() {
 
     return (
         <div>
-            <div>
-                <select name="select" onChange={e => handleOrder(e)}>
-                    <option value="vacio">ORDER BY</option>
-
-                    <optgroup label="NAME">
-                        <option value="asc">A-Z</option>
-                        <option value="des">Z-A</option>
-                    </optgroup>
-
-                    <optgroup label="ATTACK">
-                        <option value="may">HIGHER ATTACK</option>
-                        <option value="men">LOWEST ATTACK</option>
-                    </optgroup>
-                </select>
-
-            </div>
-
-            <div>
+            <div className="home">
                 <div>
+                    <select name="select" onChange={e => handleOrder(e)}>
+                        <option value="vacio">ORDER BY</option>
+
+                        <optgroup label="NAME">
+                            <option value="asc">A-Z</option>
+                            <option value="des">Z-A</option>
+                        </optgroup>
+
+                        <optgroup label="ATTACK">
+                            <option value="may">HIGHER ATTACK</option>
+                            <option value="men">LOWEST ATTACK</option>
+                        </optgroup>
+                    </select>
+
                     <select onChange={e => handleFilterByTypes(e)}>
                         <option value="types">FILTER BY TYPE</option>
                         {
                             allTypes?.map(e => (<option key={e.name} value={e.name}>{e.name.toUpperCase()}</option>))
                         }
                     </select>
-                </div>
 
-                <div>
                     <select onChange={e => handleFilterCreated(e)}>
                         <option value='allp'>FILTER BY ORIGIN</option>
                         <option value="exist">ALL</option>

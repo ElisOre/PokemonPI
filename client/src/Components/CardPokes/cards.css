@@ -1,0 +1,17 @@
+.card {
+    margin: 35px;
+    width: 17rem;
+    border-radius: 10px;
+    display: inline-block;
+    transition: all 400ms ease;
+    box-sizing: content-box;
+    min-height: 150px;
+    border-color: #ddd91396;
+    border-width: 1.5px;
+    border-style: solid;
+}
+
+.card:hover {
+    box-shadow: 20px 20px 20px rgb(0, 0, 0, 0, 4);
+    transform: translateY(-3%);
+}

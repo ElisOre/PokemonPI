@@ -1,0 +1,16 @@
+.home {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+select {
+    border-radius: 4px;
+    margin-left: 50px;
+    padding: 7px;
+    border-color: #ddd91396;
+}
+
+option {
+    background-color: white;
+}
