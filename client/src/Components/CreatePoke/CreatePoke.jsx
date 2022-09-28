@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { getTypes, postPokes } from "../../Redux/Actions";
+import './create.css';
 
 function validate(input) {
     let errors = {};
@@ -74,11 +75,11 @@ export default function CreatePoke() {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <h2>Let's create your Pokemon!</h2>
+        <div className="create">
+            <form className="form" onSubmit={handleSubmit}>
+                <h2 className="title">Let's create your Pokemon!</h2>
 
-                <label htmlFor="">Name: </label>
+                <label htmlFor="" className="labels">Name: </label>
                 <input
                     onChange={handleChange}
                     type="text"
@@ -87,81 +88,89 @@ export default function CreatePoke() {
                     placeholder="Insert name..."
                     value={poke.name}
                     required
+                    className="input"
                 />{" "}
-                {errors.name && <p>{errors.name}</p>}
+                {errors.name && <p className="error">{errors.name}</p>}
 
-                <label htmlFor="">Image: </label>
+                <label htmlFor="" className="labels">Image: </label>
                 <input
                     onChange={handleChange}
                     type="text"
                     name="image"
                     placeholder="Insert image..."
                     value={poke.image}
+                    className="input"
                 />{" "}
 
-                <label htmlFor="">Hp: </label>
+                <label htmlFor="" className="labels">Hp: </label>
                 <input
                     onChange={handleChange}
                     type="number"
                     name="hp"
                     placeholder="Insert hp..."
                     value={poke.hp}
+                    className="input"
                 />{" "}
 
-                <label htmlFor="">Attack: </label>
+                <label htmlFor="" className="labels">Attack: </label>
                 <input
                     onChange={handleChange}
                     type="number"
                     name="attack"
                     placeholder="Insert attack..."
                     value={poke.attack}
+                    className="input"
                 />{" "}
 
-                <label htmlFor="">Defense: </label>
+                <label htmlFor="" className="labels">Defense: </label>
                 <input
                     onChange={handleChange}
                     type="number"
                     name="defense"
                     placeholder="Insert defense..."
                     value={poke.defense}
+                    className="input"
                 />{" "}
 
-                <label htmlFor="">Speed: </label>
+                <label htmlFor="" className="labels">Speed: </label>
                 <input
                     onChange={handleChange}
                     type="number"
                     name="speed"
                     placeholder="Insert speed..."
                     value={poke.speed}
+                    className="input"
                 />{" "}
 
-                <label htmlFor="">Height: </label>
+                <label htmlFor="" className="labels">Height: </label>
                 <input
                     onChange={handleChange}
                     type="number"
                     name="height"
                     placeholder="Insert height..."
                     value={poke.height}
+                    className="input"
                 />{" "}
 
-                <label htmlFor="">Weight: </label>
+                <label htmlFor="" className="labels">Weight: </label>
                 <input
                     onChange={handleChange}
                     type="number"
                     name="weight"
                     placeholder="Insert weight..."
                     value={poke.weight}
+                    className="input"
                 />{" "}
 
-                <select onChange={e => handleSelect(e)}>
-                    <option value="empty">Types</option>
+                <select className="types" onChange={e => handleSelect(e)}>
+                    <option value="empty" className="t">Types</option>
                     {
                         types.map(t => (<option key={t.name} value={t.name}>{t.name}</option>))
                     }
                 </select>
-                <button type="submit">Create Pokemon</button>
+                <button className="btnCreate" type="submit">Create Pokemon</button>
             </form>
-            <Link to='/home'><button type="submit">Back Home</button></Link>
+            <Link to='/home'><button className="btnHome" type="submit">Back Home</button></Link>
         </div>
     );
 };

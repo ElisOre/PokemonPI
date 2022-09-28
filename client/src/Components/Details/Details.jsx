@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { clearDetails, getDetails } from "../../Redux/Actions";
+import './detail.css';
 
 export default function DetailsPoke(props) {
     const dispatch = useDispatch();
